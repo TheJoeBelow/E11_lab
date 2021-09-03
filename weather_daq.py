@@ -2,7 +2,7 @@
 # from Adafruit_BME280 import *
 
 import board
-from Adafruit_BME280 import basic as adafruit_bme280
+from adafruit_bme280 import basic as adafruit_bme280
 import time
 import io
 import csv 
@@ -18,28 +18,28 @@ current_time = 0
 run_time = 10
 stop_time = current_time + run_time
 units = "seconds"
-tables = []
+# tables = []
 #f= open("temp_data.txt","a")
 
-
-
-while current_time < stop_time:
-	line = []
-	temp = sensor.temperature
-	humidity = sensor.relative_humidity
-	pressure = sensor.pressure
-	current_time = current_time + 1
-	line.append(str(format(temp,'.2f')))
-	line.append(str(format(humidity,'.2f')))
-	line.append(str(format(pressure,'.2f')))
-	line.append(str(current_time))
-	line.append(units)
-	tables.append(line)
-
-	print("Time left:", stop_time - current_time)
-	time.sleep(1)
-with open("output.csv" , "wb") as f:
+with open("output.csv" , "w", newline= '') as f:
 	write = csv.writer(f)
-	write.writerows(tables)
+
+
+	while current_time < stop_time:
+		line = []
+		temp = sensor.temperature
+		humidity = sensor.relative_humidity
+		pressure = sensor.pressure
+		current_time = current_time + 1
+		line.append(round(temp,2))
+		line.append(round(humidity,2))
+		line.append(round(pressure,2))
+		line.append(current_time)
+		# print(line)
+		write.writerow(line)
+
+		print("Time left:", stop_time - current_time)
+		time.sleep(1)
+
 #f.write(line)
-#f.close
+f.close
