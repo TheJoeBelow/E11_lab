@@ -10,6 +10,13 @@ GPIO.setmode(GPIO.BCM)
 channel = 17
 GPIO.setup(channel, GPIO.IN)
 
+walk_time =180
+before_time = 0
+while before_time < walk_time:
+	time.sleep(1.0)
+	before_time +=1
+	print(180-before_time, "seconds left..")
+	
 start_time = time.time()
 current_time = start_time
 flag_time = 0
@@ -25,7 +32,7 @@ GPIO.add_event_detect(channel, GPIO.FALLING, callback = Int21R)
 count = 0
 header = ['CPM','Time']
 
-with open("inrad.csv" , "w", newline= '') as f:
+with open("outrad.csv" , "w", newline= '') as f:
 	write = csv.writer(f)
 	
 	write.writerow(header)
