@@ -12,12 +12,13 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 import matplotlib.pyplot as plt
 import io
 import requests
+import csv
 
 
 # In[2]:
 
 
-data = pd.read_csv('sensor_data.csv')
+data = read_csv('sensor_data.csv')
 
 
 # In[3]:

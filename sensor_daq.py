@@ -18,21 +18,25 @@ sleep_time = 1
 
 start_time = time.time()
 current_time = start_time
-
+flag_time = 0
 
 #print(sys.argv)
 if len(sys.argv)>1:
-	interval = int(sys.argv[1])
-	if len(sys.argv) > 2:
-		sleep_time = int(sys.argv[2])
+	interval = int(sys.argv[3])
+	#if len(sys.argv) > 3:
+		#sleep_time = int(sys.argv[4])
 header =['Temperature', 'Humidity', 'Pressure', 'PM1', 'PM2.5', 'PM10', 'Time']
-
-with open("sensor_data.csv" , "w", newline= '') as f:
+delay_time = int(sys.argv[2])
+with open(sys.argv[1]+".csv" , "w", newline= '') as f:
 	write = csv.writer(f)
 	
 	write.writerow(header)
-
-	while current_time < start_time+interval:
+	
+	while flag_time<delay_time:
+		time.sleep(sleep_time)
+		flag_time+=1
+		
+	while current_time < start_time+delay_time+interval:
 		line = []
 		temp = sensor.temperature
 		humidity = sensor.relative_humidity
